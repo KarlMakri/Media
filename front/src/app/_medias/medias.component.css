@@ -1,0 +1,27 @@
+#user {
+  float:right;
+  margin-bottom:10px;
+  margin-right:20px
+}
+
+.hidden {
+  display: none
+}
+
+.history {
+  width: 200px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 4px;
+  padding: 4px;
+  position: absolute;
+  z-index: 1;
+  font-size: .6rem
+}
+
+.clicable {
+ cursor: pointer;
+ color: #55CC33;
+ font-weight: bold;
+ font-size: .9rem
+}

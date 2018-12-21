@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Loaning index{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Loaning index</h1>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>User</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for loaning in loanings %}
+                <tr>
+                    <td>{{ loaning.id }}</td>
+                    <td>{{ loaning.start ? loaning.start|date('Y-m-d') : '' }}</td>
+                    <td>{{ loaning.end ? loaning.end|date('Y-m-d') : '' }}</td>
+                    <td>{{ loaning.user }}</td>
+                    <td>
+                        <a href="{{ path('loaning_show', {'id': loaning.id}) }}" class="btn btn-info">Détail</a>
+                        <a href="{{ path('loaning_edit', {'id': loaning.id}) }}" class="btn btn-warning">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('loaning_new') }}" class="btn btn-dark">Create new</a>
+    </div>
+
+{% endblock %}

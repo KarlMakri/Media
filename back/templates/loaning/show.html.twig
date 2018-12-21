@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Loaning{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Loaning</h1>
+
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ loaning.id }}</td>
+            </tr>
+            <tr>
+                <th>Start</th>
+                <td>{{ loaning.start ? loaning.start|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>End</th>
+                <td>{{ loaning.end ? loaning.end|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>User</th>
+                <td>{{ loaning.user }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <br><br>
+        <a href="{{ path('loaning_index') }}" class="btn btn-info">Liste</a><br><br>
+
+        <a href="{{ path('loaning_edit', {'id': loaning.id}) }}" class="btn btn-warning">Modifier</a><br><br>
+
+        {{ include('loaning/_delete_form.html.twig') }}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,79 @@
+<div id="user">
+  <input [(ngModel)]="user" type="text" placeholder="Utilisateur">
+  <br>
+  <span [ngClass]="{'hidden':user.length < 4}">
+    {{ nbLoanings() }} emprunt(s) en cours
+  </span>
+</div>
+
+<div id="filters">
+  <select #type (change)="filterType(type.value)">
+    <option value="0">Filtre par catégorie</option>
+    <option value="livre">Livre</option>
+    <option value="musique">Musique</option>
+    <option value="film">Film</option>
+  </select>
+
+  <input
+    type="text"
+    placeholder="Filter par auteur"
+    #author
+    (keyup)="filterAuthor(author.value)"
+    >
+
+  <span>Médias disponibles</span>&nbsp;
+  <input type="checkbox" [(ngModel)]="showAvailable">
+</div>
+
+<img *ngIf="medias.length === 0" src="assets/loading.gif">
+
+<table *ngIf="medias.length !== 0" class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Auteur</th>
+      <th>Catégorie</th>
+      <th>Disponibilité</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      [ngClass]="{'hidden':showAvailable && media.end}"
+      *ngFor="let media of medias; let i = index">
+      <td>{{ media.title }}</td>
+      <td>{{ media.author }}</td>
+      <td>{{ media.type | uppercase }}</td>
+      <td>
+        <div *ngIf="media.end">
+
+          Retour le {{ media.end | date:'dd/MM/yyyy' }}
+          <div>
+            (emprunté par {{ media.user}} )
+            <div *ngIf="getPastLoaningsByUser(media.user).length > 0">
+              <span class="clicable"
+                (mouseover)="historyIndex = i"
+                (mouseout)="historyIndex = -1">Historique</span>
+              <div class="history" [ngClass]="{'hidden': historyIndex !== i}">
+                <ul>
+                  <li *ngFor="let loaning of getPastLoaningsByUser(media.user)">
+                    {{loaning.start | date:'dd/MM/yyyy' }} -
+                    {{loaning.end | date:'dd/MM/yyyy' }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <img *ngIf="loadingIndex === i" height="30px" src="assets/loading2.gif">
+        <button
+          (click)="saveLoaning(media.id, i)"
+          [disabled]="user.length < 4 || nbLoanings() > 3"
+          *ngIf="!media.end"
+          [ngClass]="{'hidden':loadingIndex === i}"
+          class="btn btn-primary btn-sm">Emprunter</button>
+
+      </td>
+    </tr>
+  </tbody>
+</table>

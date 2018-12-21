@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Loaning{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Edit Loaning</h1>
+
+        {{ include('loaning/_form.html.twig', {'button_label': 'Update'}) }}<br><br>
+
+        <a href="{{ path('loaning_index') }}" class="btn btn-info">Lsite</a><br><br>
+
+        {{ include('loaning/_delete_form.html.twig') }}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Média{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" href="{{ asset ('css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset ('css/styles.css') }}">
+    </head>
+    <body>
+
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <ul>
+
+                <li><a href="{{ path('media_index') }}">Média</a></li>
+                <li><a href="{{ path('user_index') }}">User</a></li>
+                <li><a href="{{ path('loaning_index') }}">Emprunts</a></li>
+                {#<li><a href="{{ path('loaning_end') }}">Rendre</a></li>#}
+            </ul>
+        </nav>
+    </header>
+    <br><br><br><br><br>
+
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
